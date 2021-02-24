@@ -1,4 +1,5 @@
-import javax.servlet.RequestDispatcher;
+package javaee;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -7,18 +8,19 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(
-        name = "loginServlet",
-        urlPatterns = "/login"
+        value = "/login"
 )
 public class LoginServlet extends HttpServlet {
+
+    public void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        String username = req.getParameter("username");
+        req.getRequestDispatcher("/login.jsp").forward(req, resp);
+    }
+    //WE USED THIS METHOD
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher view = req.getRequestDispatcher("login.jsp");
-        view.forward(req, resp);
-    }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("login.jsp").forward(req, resp);
+        req.getRequestDispatcher("/index.jsp").forward(req, resp);
     }
 }
